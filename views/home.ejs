@@ -1,0 +1,46 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block align-self-center">
+            <div class="card bg-dark text-white p-3">
+                <div class="card-body">
+                    <h5 class="card-title">About</h5>
+                    <p class="card-text">
+                        <%= _.truncate(homeContent, {"length": 400}) %>
+                    </p>
+                    <a href="/about" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-9 col-xl-8 col-lg-7">
+            <div class="card bg-dark text-white p-3 h-100">
+                <div class="card-body">
+                    <% posts.forEach(function(post) { %>
+                        <div class="card-border mb-3">
+                            <h5 class="card-title">
+                                <%= post.title %>
+                            </h5>
+                            <p class="card-text">
+                                <%= _.truncate(post.content, {"length": 100}) %>
+                            </p>
+                            <a href="/posts/<%= post._id %>" class="btn btn-primary">Read More</a>
+                            <a href="/posts/<%= post._id %>/edit" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <form action="/posts/<%= post._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </form>
+                            <br><br>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer") -%>
